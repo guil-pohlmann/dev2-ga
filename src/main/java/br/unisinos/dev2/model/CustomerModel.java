@@ -2,6 +2,8 @@ package br.unisinos.dev2.model;
 
 public class CustomerModel {
 
+    private String id;
+
     private String email;
 
     private String name;
