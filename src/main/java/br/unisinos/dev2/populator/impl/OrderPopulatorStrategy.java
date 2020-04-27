@@ -4,7 +4,9 @@ import br.unisinos.dev2.dto.CustomerDTO;
 import br.unisinos.dev2.dto.OrderDTO;
 import br.unisinos.dev2.model.OrderModel;
 import br.unisinos.dev2.populator.PopulatorStrategy;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderPopulatorStrategy implements PopulatorStrategy<OrderModel, OrderDTO> {
 
     @Override
