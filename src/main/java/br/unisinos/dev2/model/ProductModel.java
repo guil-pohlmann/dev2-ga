@@ -1,6 +1,6 @@
 package br.unisinos.dev2.model;
 
-public class ProductModel {
+public class ProductModel extends AbstractModel {
 
     private String code;
 

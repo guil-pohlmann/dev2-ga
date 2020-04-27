@@ -2,7 +2,7 @@ package br.unisinos.dev2.model;
 
 import java.util.List;
 
-public class OrderModel {
+public class OrderModel extends AbstractModel {
 
     private String code;
 

@@ -1,6 +1,6 @@
 package br.unisinos.dev2.model;
 
-public class AddressModel {
+public class AddressModel extends AbstractModel {
 
     private String country;
 

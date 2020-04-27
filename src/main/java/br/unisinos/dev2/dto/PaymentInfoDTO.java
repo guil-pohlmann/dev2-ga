@@ -1,6 +1,6 @@
 package br.unisinos.dev2.dto;
 
-public class PaymentInfoDTO {
+public class PaymentInfoDTO implements java.io.Serializable {
     private String creditCardOwner;
 
     private String creditCardNumber;

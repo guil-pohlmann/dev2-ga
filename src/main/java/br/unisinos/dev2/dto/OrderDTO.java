@@ -2,7 +2,7 @@ package br.unisinos.dev2.dto;
 
 import java.util.List;
 
-public class OrderDTO {
+public class OrderDTO implements java.io.Serializable {
     private String code;
 
     private CustomerDTO owner;

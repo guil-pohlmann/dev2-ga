@@ -1,6 +1,6 @@
 package br.unisinos.dev2.model;
 
-public class CustomerModel {
+public class CustomerModel extends AbstractModel {
 
     private String id;
 

@@ -1,6 +1,6 @@
 package br.unisinos.dev2.model;
 
-public class PaymentInfoModel {
+public class PaymentInfoModel extends AbstractModel {
 
     private String creditCardOwner;
 

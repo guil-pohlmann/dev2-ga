@@ -2,7 +2,7 @@ package br.unisinos.dev2.dto;
 
 import java.util.List;
 
-public class CartDTO {
+public class CartDTO implements java.io.Serializable {
 
     private CustomerDTO user;
 
