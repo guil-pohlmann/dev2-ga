@@ -1,30 +1,30 @@
 package br.unisinos.dev2.strategy.impl;
 
+import br.unisinos.dev2.context.ConverterContext;
 import br.unisinos.dev2.dto.*;
 import br.unisinos.dev2.model.CartModel;
-import br.unisinos.dev2.model.ProductModel;
 import br.unisinos.dev2.strategy.PopulatorStrategy;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 @Component
 public class CartPopulatorStrategy implements PopulatorStrategy<CartModel, CartDTO> {
+
+    @Resource
+    private ConverterContext converterContext;
+
     @Override
     public void populate(CartModel source, CartDTO target) {
-        PaymentInfoPopulatorStrategy paymentInfoPopulatorStrategy = new PaymentInfoPopulatorStrategy();
-        CustomerPopulatorStrategy customerPopulatorStrategy = new CustomerPopulatorStrategy();
-        ProductPopulatorStrategy productPopulatorStrategy = new ProductPopulatorStrategy();
         target.setCartTotal(source.getCartTotal());
-        PaymentInfoDTO paymentInfo = new PaymentInfoDTO();
-        paymentInfoPopulatorStrategy.populate(source.getPaymentInfo(), paymentInfo);
-        target.setPaymentInfo(paymentInfo);
-        CustomerDTO user = new CustomerDTO();
-        customerPopulatorStrategy.populate(source.getUser(), user);
-        target.setUser(user);
-        ProductDTO product;
-        for (ProductModel productModel: source.getProducts()){
-            product = new ProductDTO();
-            productPopulatorStrategy.populate(productModel, product);
-            target.getProducts().add(product);
-        }
+
+        converterContext.setPopulatorStrategy(new CustomerPopulatorStrategy());
+        target.setUser(converterContext.convert(source.getUser(), target.getUser().getClass()));
+
+        converterContext.setPopulatorStrategy(new PaymentInfoPopulatorStrategy());
+        target.setPaymentInfo(converterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
+
+        converterContext.setPopulatorStrategy(new ProductPopulatorStrategy());
+        target.setProducts(converterContext.convertAll(source.getProducts(), ProductDTO.class));
     }
 }
