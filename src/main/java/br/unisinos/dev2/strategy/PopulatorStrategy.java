@@ -1,4 +1,4 @@
-package br.unisinos.dev2.populator;
+package br.unisinos.dev2.strategy;
 
 public interface PopulatorStrategy<SOURCE, TARGET> {
 

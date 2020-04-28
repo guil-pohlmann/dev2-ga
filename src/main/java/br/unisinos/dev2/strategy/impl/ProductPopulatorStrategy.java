@@ -1,9 +1,11 @@
-package br.unisinos.dev2.populator.impl;
+package br.unisinos.dev2.strategy.impl;
 
 import br.unisinos.dev2.dto.ProductDTO;
 import br.unisinos.dev2.model.ProductModel;
-import br.unisinos.dev2.populator.PopulatorStrategy;
+import br.unisinos.dev2.strategy.PopulatorStrategy;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductPopulatorStrategy implements PopulatorStrategy<ProductModel, ProductDTO> {
 
     @Override
