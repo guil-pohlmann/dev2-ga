@@ -97,6 +97,14 @@ public class OrderModel extends AbstractModel {
         this.products = products;
     }
 
+    public OrderState getState() {
+        return state;
+    }
+
+    public void setState(OrderState state) {
+        this.state = state;
+    }
+
     public void gotOpen(){
         state.gotOpen();
     }
