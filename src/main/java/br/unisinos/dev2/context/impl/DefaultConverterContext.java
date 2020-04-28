@@ -9,6 +9,7 @@ import br.unisinos.dev2.strategy.PopulatorStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import static java.util.Objects.isNull;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class DefaultConverterContext implements ConverterContext {
 
     @Override
     public <T extends java.io.Serializable> T convert(AbstractModel source, Class<T> type) {
+        createDTOFactoryIfNull();
         try {
             T abstractDTO = dtoFactory.create(type);
             populatorStrategy.populate(source, abstractDTO);
@@ -42,6 +44,7 @@ public class DefaultConverterContext implements ConverterContext {
 
     @Override
     public <T extends AbstractModel> T convert(AbstractDTO source, Class<T> type) {
+        createModelFactoryIfNull();
         try {
             T abstractModel = modelFactory.create(type);
             populatorStrategy.populate(source, abstractModel);
@@ -63,5 +66,17 @@ public class DefaultConverterContext implements ConverterContext {
     @Override
     public void setPopulatorStrategy(PopulatorStrategy populatorStrategy) {
         this.populatorStrategy = populatorStrategy;
+    }
+
+    protected void createModelFactoryIfNull(){
+        if (isNull(modelFactory)){
+            modelFactory = new ModelFactory();
+        }
+    }
+
+    protected void createDTOFactoryIfNull(){
+        if (isNull(dtoFactory)){
+            dtoFactory = new DTOFactory();
+        }
     }
 }
