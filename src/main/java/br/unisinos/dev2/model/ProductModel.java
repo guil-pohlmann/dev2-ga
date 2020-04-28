@@ -16,7 +16,7 @@ public class ProductModel extends AbstractModel {
 
     private double price;
 
-    private ProductModel(){}
+    public ProductModel(){}
 
     public ProductModel(String upc, String name, String description, double price) {
         this.upc = upc;
