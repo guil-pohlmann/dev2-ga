@@ -39,4 +39,37 @@ public class BuilderTest {
         Assert.assertNotNull(customer.getAddress());
         Assert.assertNotNull(customer.getPaymentInfo());
     }
+
+    @Test
+    void shouldBuildCustomerWithNoAddress(){
+        CustomerModel customer = new CustomerModel.CustomerBuilder("test@mail.com", "test name")
+                .withPaymentIfo(new PaymentInfoDTO())
+                .build();
+        Assert.assertNotNull(customer);
+        Assert.assertNotNull(customer.getPaymentInfo());
+        Assert.assertNull(customer.getAddress());
+    }
+
+    @Test
+    void shouldBuildCustomerWithNoPaymentInfo(){
+        CustomerModel customer = new CustomerModel.CustomerBuilder("test@mail.com", "test name")
+                .withAddress(new AddressDTO())
+                .build();
+        Assert.assertNotNull(customer);
+        Assert.assertNotNull(customer.getAddress());
+        Assert.assertNull(customer.getPaymentInfo());
+    }
+
+    @Test
+    void shouldBuildCustomerWithNoPaymentInfoAndNoAddress(){
+        String email = "test@mail.com";
+        String name = "test name";
+        CustomerModel customer = new CustomerModel.CustomerBuilder(email, name)
+                .build();
+        Assert.assertNotNull(customer);
+        Assert.assertNull(customer.getAddress());
+        Assert.assertNull(customer.getPaymentInfo());
+        Assert.assertEquals(customer.getEmail(), email);
+        Assert.assertEquals(customer.getName(), name);
+    }
 }
