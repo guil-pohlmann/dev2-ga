@@ -12,19 +12,18 @@ import br.unisinos.dev2.strategy.impl.ModelToDTOProductPopulatorStrategy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.event.annotation.BeforeTestExecution;
 
 import javax.annotation.Resource;
 
 import static org.junit.Assert.assertEquals;
 
+@SpringBootTest
 class DefaultConverterContextTest {
 
     @Resource
     private ConverterContext defaultConverterContext;
-
-    @Resource
-    private DTOFactory dtoFactory;
 
     private static final String PRODUCT_CODE = "PRODUCT_CODE";
     private static final String PRODUCT_DESCRIPTION = "PRODUCT_DESC";
@@ -42,7 +41,7 @@ class DefaultConverterContextTest {
         assertEquals(productModel.getDescription(), productDTO.getDescription());
         assertEquals(productModel.getName(), productDTO.getName());
         assertEquals(productModel.getUpc(), productDTO.getUpc());
-        assertEquals(productModel.getPrice(), productDTO.getPrice());
+        assertEquals(productModel.getPrice(), productDTO.getPrice(), 0.0);
     }
 
     ProductModel mockProductModel(){
