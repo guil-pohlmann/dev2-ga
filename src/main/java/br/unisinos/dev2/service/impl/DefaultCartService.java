@@ -1,9 +1,16 @@
 package br.unisinos.dev2.service.impl;
 
+import br.unisinos.dev2.context.ConverterContext;
+import br.unisinos.dev2.context.impl.DefaultConverterContext;
+import br.unisinos.dev2.dto.ProductDTO;
 import br.unisinos.dev2.factory.ModelFactory;
 import br.unisinos.dev2.model.CartModel;
 import br.unisinos.dev2.model.ProductModel;
 import br.unisinos.dev2.service.CartService;
+import br.unisinos.dev2.strategy.impl.DtoToModelProductPopulatorStrategy;
+import org.graalvm.compiler.lir.LIRInstruction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -15,9 +22,16 @@ import static java.util.Objects.nonNull;
 
 @Component
 public class DefaultCartService implements CartService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultCartService.class);
+
     private CartModel cartModel;
+
     @Resource
     private ModelFactory modelFactory;
+
+    @Resource
+    private ConverterContext converterContext;
 
     @Override
     public CartModel getCurrentCart() {
@@ -50,6 +64,16 @@ public class DefaultCartService implements CartService {
         if (nonNull(cartModel)) {
             cartModel.getProducts().add(productModel);
             calculateCart(cartModel);
+        }
+    }
+
+    public void addToCart(ProductDTO productDTO){
+        try {
+            converterContext.setPopulatorStrategy(new DtoToModelProductPopulatorStrategy());
+            ProductModel productModel = converterContext.convert(productDTO, ProductModel.class);
+            addToCart(productModel);
+        } catch (Exception e){
+            LOGGER.error("Error creating model using {}", ModelFactory.class);
         }
     }
 
