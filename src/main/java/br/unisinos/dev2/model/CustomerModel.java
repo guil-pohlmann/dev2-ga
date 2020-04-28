@@ -29,7 +29,7 @@ public class CustomerModel extends AbstractModel {
         this.paymentInfo = builder.paymentInfo;
     }
 
-    public static class CustomerBuilder{
+    public static class CustomerBuilder {
         private String email;
         private String name;
         private PaymentInfoModel paymentInfo;

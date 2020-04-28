@@ -20,7 +20,6 @@ public class DefaultConverterContext implements ConverterContext {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultConverterContext.class);
 
-    @Resource
     private PopulatorStrategy populatorStrategy;
 
     @Resource

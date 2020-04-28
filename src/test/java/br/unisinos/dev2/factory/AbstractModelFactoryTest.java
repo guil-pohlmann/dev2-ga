@@ -1,8 +1,6 @@
-package br.unisinos.dev2.context.impl;
+package br.unisinos.dev2.factory;
 
 import br.unisinos.dev2.dto.*;
-import br.unisinos.dev2.factory.DTOFactory;
-import br.unisinos.dev2.factory.ModelFactory;
 import br.unisinos.dev2.model.*;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -11,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
 @SpringBootTest
-class AbstractModelFactoryTest {
+public class AbstractModelFactoryTest {
 
     @Resource
     private ModelFactory modelFactory;

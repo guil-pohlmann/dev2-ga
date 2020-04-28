@@ -30,7 +30,7 @@ public class OrderModel extends AbstractModel {
     private ReceivedOrder receivedOrder;
     private SentOrder sentOrder;
 
-    public OrderModel(){
+    public OrderModel() {
         this.canceledOrder = new CanceledOrder(this);
         this.closedOrder = new ClosedOrder(this);
         this.openOrder = new OpenOrder(this);
@@ -105,58 +105,61 @@ public class OrderModel extends AbstractModel {
         this.state = state;
     }
 
-    public void gotOpen(){
+    public void gotOpen() {
         state.gotOpen();
     }
 
-    public void gotPendentPayment(){
+    public void gotPendentPayment() {
         state.gotPendentPayment();
     }
 
-    public void gotPayment(){
+    public void gotPayment() {
         state.gotPayment();
     }
 
-    public void gotSent(){
+    public void gotSent() {
         state.gotSent();
     }
 
-    public void gotReceived(){
+    public void gotReceived() {
         state.gotReceived();
     }
 
-    public void gotCanceled(){
+    public void gotCanceled() {
         state.gotCanceled();
     }
-    public void gotClosed(){
+
+    public void gotClosed() {
         state.gotClosed();
     }
 
-    public void toOpen(){
+    public void toOpen() {
         state = openOrder;
     }
 
-    public void toClosed(){
+    public void toClosed() {
         state = closedOrder;
     }
 
-    public void toCanceled(){
+    public void toCanceled() {
         state = canceledOrder;
     }
 
-    public void toPaid(){
+    public void toPaid() {
         state = paidOrder;
     }
 
-    public void toPendent(){
-        state = pendentPaymentOrder;
+    public void toPendent() {
+        if (state != paidOrder)
+            state = pendentPaymentOrder;
     }
 
-    public void toReceived(){
+    public void toReceived() {
         state = receivedOrder;
     }
 
-    public void toSent(){
-        state = sentOrder;
+    public void toSent() {
+        if (state == paidOrder)
+            state = sentOrder;
     }
 }
