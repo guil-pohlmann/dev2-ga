@@ -21,7 +21,7 @@ public class AddressModel extends AbstractModel {
 
     private String postalCode;
 
-    private AddressModel(){}
+    public AddressModel(){}
 
     //TODO maybe add a builder here?
     public AddressModel(AddressDTO address){
