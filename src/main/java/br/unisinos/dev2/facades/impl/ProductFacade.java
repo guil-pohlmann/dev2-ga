@@ -6,24 +6,25 @@ import br.unisinos.dev2.exception.IncompleteDataSendException;
 import br.unisinos.dev2.exception.ProductNotFoundException;
 import br.unisinos.dev2.model.ProductModel;
 import br.unisinos.dev2.repository.ProductRepository;
-import br.unisinos.dev2.strategy.impl.ProductPopulatorStrategy;
+import br.unisinos.dev2.strategy.impl.ModelToDTOProductPopulatorStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Deprecated
 @Component
 public class ProductFacade {
 
     @Autowired
     private ProductRepository productRepository;
-    private ProductPopulatorStrategy productPopulatorStrategy = new ProductPopulatorStrategy();
+    private ModelToDTOProductPopulatorStrategy modelToDTOProductPopulatorStrategy = new ModelToDTOProductPopulatorStrategy();
 
     public ProductDTO getProduct(String id){
         Optional<ProductModel> product = productRepository.findById(id);
         ProductDTO productDTO = new ProductDTO();
         if(product.isPresent()){
-            productPopulatorStrategy.populate(product.get(), productDTO);
+            modelToDTOProductPopulatorStrategy.populate(product.get(), productDTO);
         }
         else {
             throw new ProductNotFoundException();
@@ -38,7 +39,7 @@ public class ProductFacade {
         ProductModel product = new ProductModel(productDTO.getUpc(), productDTO.getName(), productDTO.getDescription(), productDTO.getPrice());
         productRepository.save(product);
         ProductDTO responseDTO = new ProductDTO();
-        productPopulatorStrategy.populate(product, responseDTO);
+        modelToDTOProductPopulatorStrategy.populate(product, responseDTO);
         return responseDTO;
     }
 
@@ -55,7 +56,7 @@ public class ProductFacade {
             newProduct.setPrice(productDTO.getPrice());
             newProduct.setUpc(productDTO.getUpc());
 
-            productPopulatorStrategy.populate(newProduct, responseDTO);
+            modelToDTOProductPopulatorStrategy.populate(newProduct, responseDTO);
         }
         else {
             throw new ProductNotFoundException();

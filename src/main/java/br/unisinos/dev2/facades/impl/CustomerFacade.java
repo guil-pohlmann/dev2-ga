@@ -4,25 +4,27 @@ import br.unisinos.dev2.dto.CustomerDTO;
 import br.unisinos.dev2.exception.CustomerNotFoundException;
 import br.unisinos.dev2.exception.IncompleteDataSendException;
 import br.unisinos.dev2.model.CustomerModel;
-import br.unisinos.dev2.strategy.impl.CustomerPopulatorStrategy;
+import br.unisinos.dev2.strategy.impl.ModelToDTOCustomerPopulatorStrategy;
 import br.unisinos.dev2.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.Optional;
 
+@Deprecated
 @Component
 public class CustomerFacade {
 
     @Autowired
     private CustomerRepository customerRepository;
-    private CustomerPopulatorStrategy customerPopulatorStrategy = new CustomerPopulatorStrategy();
+    private ModelToDTOCustomerPopulatorStrategy modelToDTOCustomerPopulatorStrategy = new ModelToDTOCustomerPopulatorStrategy();
 
     public CustomerDTO getCustomer(String id){
         Optional<CustomerModel> customer = customerRepository.findById(id);
         CustomerDTO customerDTO = new CustomerDTO();
         if(customer.isPresent()){
-            customerPopulatorStrategy.populate(customer.get(), customerDTO);
+            modelToDTOCustomerPopulatorStrategy.populate(customer.get(), customerDTO);
         }
         else {
             throw new CustomerNotFoundException();
@@ -40,7 +42,7 @@ public class CustomerFacade {
                 .build();
         customerRepository.save(customer);
         CustomerDTO responseDTO = new CustomerDTO();
-        customerPopulatorStrategy.populate(customer, responseDTO);
+        modelToDTOCustomerPopulatorStrategy.populate(customer, responseDTO);
         return responseDTO;
     }
 
