@@ -2,6 +2,8 @@ package br.unisinos.dev2.dto;
 
 public class CustomerDTO extends AbstractDTO implements java.io.Serializable {
 
+    private String id;
+
     private String email;
 
     private String name;
@@ -9,6 +11,14 @@ public class CustomerDTO extends AbstractDTO implements java.io.Serializable {
     private PaymentInfoDTO paymentInfo;
 
     private AddressDTO address;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;

@@ -1,5 +1,7 @@
 package br.unisinos.dev2.model;
 
+import br.unisinos.dev2.dto.PaymentInfoDTO;
+
 public class PaymentInfoModel extends AbstractModel {
 
     private String creditCardOwner;
@@ -11,6 +13,16 @@ public class PaymentInfoModel extends AbstractModel {
     private String validToMonth;
 
     private String validToYear;
+
+    private PaymentInfoModel(){}
+
+    public PaymentInfoModel(PaymentInfoDTO paymentInfoDTO) {
+        this.creditCardOwner = paymentInfoDTO.getCreditCardOwner();
+        this.creditCardNumber= paymentInfoDTO.getCreditCardNumber();
+        this.provider = paymentInfoDTO.getProvider();
+        this.validToMonth = paymentInfoDTO.getValidToMonth();
+        this.validToYear = paymentInfoDTO.getValidToYear();
+    }
 
     public String getCreditCardOwner() {
         return creditCardOwner;
