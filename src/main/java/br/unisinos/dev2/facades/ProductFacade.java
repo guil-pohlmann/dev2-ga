@@ -5,8 +5,8 @@ import br.unisinos.dev2.exception.CustomerNotFoundException;
 import br.unisinos.dev2.exception.IncompleteDataSendException;
 import br.unisinos.dev2.exception.ProductNotFoundException;
 import br.unisinos.dev2.model.ProductModel;
-import br.unisinos.dev2.populator.impl.ProductPopulatorStrategy;
 import br.unisinos.dev2.repository.ProductRepository;
+import br.unisinos.dev2.strategy.impl.ProductPopulatorStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

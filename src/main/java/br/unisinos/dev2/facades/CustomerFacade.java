@@ -4,7 +4,7 @@ import br.unisinos.dev2.dto.CustomerDTO;
 import br.unisinos.dev2.exception.CustomerNotFoundException;
 import br.unisinos.dev2.exception.IncompleteDataSendException;
 import br.unisinos.dev2.model.CustomerModel;
-import br.unisinos.dev2.populator.impl.CustomerPopulatorStrategy;
+import br.unisinos.dev2.strategy.impl.CustomerPopulatorStrategy;
 import br.unisinos.dev2.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +41,6 @@ public class CustomerFacade {
         customerRepository.save(customer);
         CustomerDTO responseDTO = new CustomerDTO();
         customerPopulatorStrategy.populate(customer, responseDTO);
-        System.out.println(customer.getId());
         return responseDTO;
     }
 
