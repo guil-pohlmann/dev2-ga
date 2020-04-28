@@ -6,7 +6,7 @@ import br.unisinos.dev2.strategy.PopulatorStrategy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PaymentInfoPopulatorStrategy implements PopulatorStrategy<PaymentInfoModel, PaymentInfoDTO> {
+public class ModelToDTOPaymentInfoPopulatorStrategy implements PopulatorStrategy<PaymentInfoModel, PaymentInfoDTO> {
 
     @Override
     public void populate(PaymentInfoModel source, PaymentInfoDTO target) {

@@ -6,7 +6,7 @@ import br.unisinos.dev2.strategy.PopulatorStrategy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductPopulatorStrategy implements PopulatorStrategy<ProductModel, ProductDTO> {
+public class ModelToDTOProductPopulatorStrategy implements PopulatorStrategy<ProductModel, ProductDTO> {
 
     @Override
     public void populate(ProductModel source, ProductDTO target) {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class CustomerPopulatorStrategy implements PopulatorStrategy<CustomerModel, CustomerDTO> {
+public class ModelToDTOCustomerPopulatorStrategy implements PopulatorStrategy<CustomerModel, CustomerDTO> {
 
     @Resource
     private ConverterContext converterContext;
@@ -20,10 +20,10 @@ public class CustomerPopulatorStrategy implements PopulatorStrategy<CustomerMode
         target.setEmail(source.getEmail());
         target.setName(source.getEmail());
 
-        converterContext.setPopulatorStrategy(new PaymentInfoPopulatorStrategy());
+        converterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
         target.setPaymentInfo(converterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
 
-        converterContext.setPopulatorStrategy(new DeliveryAddressPopulatorStrategy());
+        converterContext.setPopulatorStrategy(new ModelToDTODeliveryAddressPopulatorStrategy());
         target.setAddress(converterContext.convert(source.getAddress(), target.getAddress().getClass()));
 
     }

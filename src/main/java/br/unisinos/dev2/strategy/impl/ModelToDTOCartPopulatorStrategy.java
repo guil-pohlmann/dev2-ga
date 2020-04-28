@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class CartPopulatorStrategy implements PopulatorStrategy<CartModel, CartDTO> {
+public class ModelToDTOCartPopulatorStrategy implements PopulatorStrategy<CartModel, CartDTO> {
 
     @Resource
     private ConverterContext converterContext;
@@ -18,13 +18,13 @@ public class CartPopulatorStrategy implements PopulatorStrategy<CartModel, CartD
     public void populate(CartModel source, CartDTO target) {
         target.setCartTotal(source.getCartTotal());
 
-        converterContext.setPopulatorStrategy(new CustomerPopulatorStrategy());
+        converterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
         target.setUser(converterContext.convert(source.getUser(), target.getUser().getClass()));
 
-        converterContext.setPopulatorStrategy(new PaymentInfoPopulatorStrategy());
+        converterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
         target.setPaymentInfo(converterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
 
-        converterContext.setPopulatorStrategy(new ProductPopulatorStrategy());
+        converterContext.setPopulatorStrategy(new ModelToDTOProductPopulatorStrategy());
         target.setProducts(converterContext.convertAll(source.getProducts(), ProductDTO.class));
     }
 }

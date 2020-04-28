@@ -6,7 +6,7 @@ import br.unisinos.dev2.strategy.PopulatorStrategy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeliveryAddressPopulatorStrategy implements PopulatorStrategy<AddressModel, AddressDTO> {
+public class ModelToDTODeliveryAddressPopulatorStrategy implements PopulatorStrategy<AddressModel, AddressDTO> {
 
     @Override
     public void populate(AddressModel source, AddressDTO target) {
