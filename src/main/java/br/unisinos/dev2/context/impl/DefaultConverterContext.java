@@ -7,6 +7,9 @@ import br.unisinos.dev2.strategy.PopulatorStrategy;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DefaultConverterContext implements ConverterContext {
@@ -26,6 +29,15 @@ public class DefaultConverterContext implements ConverterContext {
             System.out.println("Error while converting to DTO");
         }
         return null;
+    }
+
+    @Override
+    public <T extends Serializable> List<T> convertAll(List<AbstractModel> source, Class<T> type) {
+
+        return source.stream()
+                    .map(
+                        product -> convert(product, type)
+                     ).collect(Collectors.toList());
     }
 
     public void setPopulatorStrategy(PopulatorStrategy populatorStrategy) {
