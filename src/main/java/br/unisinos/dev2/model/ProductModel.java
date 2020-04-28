@@ -1,7 +1,11 @@
 package br.unisinos.dev2.model;
 
-public class ProductModel extends AbstractModel {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "product")
+public class ProductModel extends AbstractModel {
+    @Id
     private String code;
 
     private String upc;
@@ -11,6 +15,15 @@ public class ProductModel extends AbstractModel {
     private String description;
 
     private double price;
+
+    private ProductModel(){}
+
+    public ProductModel(String upc, String name, String description, double price) {
+        this.upc = upc;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
     public String getCode() {
         return code;

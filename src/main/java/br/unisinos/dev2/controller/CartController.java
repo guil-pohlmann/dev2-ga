@@ -2,6 +2,8 @@ package br.unisinos.dev2.controller;
 
 import br.unisinos.dev2.dto.CartDTO;
 import br.unisinos.dev2.dto.ProductDTO;
+import br.unisinos.dev2.repository.AddressRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/cart")
@@ -20,7 +22,7 @@ public class CartController {
         return cartDTO;
     }
 
-    @PostMapping("/{id}/add")
+    @PutMapping("/{id}")
     public CartDTO addProduct(@PathVariable String id, @RequestBody Integer code){
 
         //TODO implement search end persitence
@@ -30,7 +32,7 @@ public class CartController {
         return cartDTO;
     }
 
-    @DeleteMapping("/{id}/remove")
+    @DeleteMapping("/{id}")
     public CartDTO removeProduct(@PathVariable String id, @RequestBody Integer code){
 
         //TODO implement search end persitence

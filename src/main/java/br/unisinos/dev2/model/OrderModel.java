@@ -18,6 +18,7 @@ public class OrderModel extends AbstractModel {
 
     private List<ProductModel> products;
 
+
     public String getCode() {
         return code;
     }

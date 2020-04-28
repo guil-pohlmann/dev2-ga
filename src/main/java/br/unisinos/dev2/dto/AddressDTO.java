@@ -1,6 +1,6 @@
 package br.unisinos.dev2.dto;
 
-public class AddressDTO implements java.io.Serializable {
+public class AddressDTO extends AbstractDTO implements java.io.Serializable {
 
     private String country;
 
