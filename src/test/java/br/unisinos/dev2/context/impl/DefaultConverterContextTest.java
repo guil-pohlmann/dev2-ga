@@ -7,6 +7,7 @@ import br.unisinos.dev2.factory.DTOFactory;
 import br.unisinos.dev2.model.OrderModel;
 import br.unisinos.dev2.model.ProductModel;
 import br.unisinos.dev2.strategy.PopulatorStrategy;
+import br.unisinos.dev2.strategy.impl.DtoToModelProductPopulatorStrategy;
 import br.unisinos.dev2.strategy.impl.ModelToDTOCustomerPopulatorStrategy;
 import br.unisinos.dev2.strategy.impl.ModelToDTOOrderPopulatorStrategy;
 import br.unisinos.dev2.strategy.impl.ModelToDTOProductPopulatorStrategy;
@@ -47,6 +48,19 @@ class DefaultConverterContextTest {
     }
 
     @Test
+    void shouldConvertProductDtoToProductModelWhenUsingProductPopulatorStrategy() {
+        defaultConverterContext.setPopulatorStrategy(new DtoToModelProductPopulatorStrategy());
+        ProductDTO productDTO = mockProductDTO();
+        ProductModel productModel = defaultConverterContext.convert(productDTO, ProductModel.class);
+
+        assertEquals(productModel.getCode(), productDTO.getCode());
+        assertEquals(productModel.getDescription(), productDTO.getDescription());
+        assertEquals(productModel.getName(), productDTO.getName());
+        assertEquals(productModel.getUpc(), productDTO.getUpc());
+        assertEquals(productModel.getPrice(), productDTO.getPrice(), 0.0);
+    }
+
+    @Test
     void shouldReturnNullWhenTryToConvertProductUsingCustomerStrategy(){
         defaultConverterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
         ProductModel productModel = mockProductModel();
@@ -55,14 +69,25 @@ class DefaultConverterContextTest {
         assertNull(productDTO);
     }
 
-    ProductModel mockProductModel(){
-        ProductModel productModel = new ProductModel();
-        productModel.setCode(PRODUCT_CODE);
-        productModel.setDescription(PRODUCT_DESCRIPTION);
-        productModel.setName(PRODUCT_NAME);
-        productModel.setPrice(PRODUCT_PRICE);
-        productModel.setUpc(PRODUCT_UPC);
+    ProductDTO mockProductDTO(){
+        ProductDTO product = new ProductDTO();
+        product.setCode(PRODUCT_CODE);
+        product.setDescription(PRODUCT_DESCRIPTION);
+        product.setName(PRODUCT_NAME);
+        product.setPrice(PRODUCT_PRICE);
+        product.setUpc(PRODUCT_UPC);
 
-        return productModel;
+        return product;
+    }
+
+    ProductModel mockProductModel(){
+        ProductModel product = new ProductModel();
+        product.setCode(PRODUCT_CODE);
+        product.setDescription(PRODUCT_DESCRIPTION);
+        product.setName(PRODUCT_NAME);
+        product.setPrice(PRODUCT_PRICE);
+        product.setUpc(PRODUCT_UPC);
+
+        return product;
     }
 }

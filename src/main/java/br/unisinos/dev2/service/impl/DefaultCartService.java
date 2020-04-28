@@ -29,7 +29,7 @@ public class DefaultCartService implements CartService {
     private ModelFactory modelFactory;
 
     @Resource
-    private ConverterContext converterContext;
+    private ConverterContext defaultConverterContext;
 
     @Override
     public CartModel getCurrentCart() {
@@ -59,7 +59,7 @@ public class DefaultCartService implements CartService {
 
     @Override
     public void addToCart(ProductModel productModel) {
-        if (nonNull(cartModel)) {
+        if (nonNull(getCurrentCart())) {
             cartModel.getProducts().add(productModel);
             calculateCart(cartModel);
         }
@@ -67,8 +67,8 @@ public class DefaultCartService implements CartService {
 
     public void addToCart(ProductDTO productDTO){
         try {
-            converterContext.setPopulatorStrategy(new DtoToModelProductPopulatorStrategy());
-            ProductModel productModel = converterContext.convert(productDTO, ProductModel.class);
+            defaultConverterContext.setPopulatorStrategy(new DtoToModelProductPopulatorStrategy());
+            ProductModel productModel = defaultConverterContext.convert(productDTO, ProductModel.class);
             addToCart(productModel);
         } catch (Exception e){
             LOGGER.error("Error creating model using {}", ModelFactory.class);

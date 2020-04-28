@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 public class ModelToDTOOrderPopulatorStrategy implements PopulatorStrategy<OrderModel, OrderDTO> {
 
     @Resource
-    private ConverterContext converterContext;
+    private ConverterContext defaultConverterContext;
 
     @Override
     public void populate(OrderModel source, OrderDTO target) {
@@ -22,16 +22,16 @@ public class ModelToDTOOrderPopulatorStrategy implements PopulatorStrategy<Order
         target.setOrderTotal(source.getOrderTotal());
         target.setOrderState(source.getState());
 
-        converterContext.setPopulatorStrategy(new ModelToDTODeliveryAddressPopulatorStrategy());
-        target.setDeliveryAddress(converterContext.convert(source.getDeliveryAddress(), target.getDeliveryAddress().getClass()));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTODeliveryAddressPopulatorStrategy());
+        target.setDeliveryAddress(defaultConverterContext.convert(source.getDeliveryAddress(), target.getDeliveryAddress().getClass()));
 
-        converterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
-        target.setOwner(converterContext.convert(source.getOwner(), target.getOwner().getClass()));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
+        target.setOwner(defaultConverterContext.convert(source.getOwner(), target.getOwner().getClass()));
 
-        converterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
-        target.setPaymentInfo(converterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
+        target.setPaymentInfo(defaultConverterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
 
-        converterContext.setPopulatorStrategy(new ModelToDTOProductPopulatorStrategy());
-        target.setProducts(converterContext.convertAll(source.getProducts(), ProductDTO.class));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOProductPopulatorStrategy());
+        target.setProducts(defaultConverterContext.convertAll(source.getProducts(), ProductDTO.class));
     }
 }

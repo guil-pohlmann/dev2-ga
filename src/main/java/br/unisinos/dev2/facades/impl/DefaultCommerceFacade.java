@@ -26,7 +26,7 @@ public class DefaultCommerceFacade implements CommerceFacade {
     private OrderService orderService;
 
     @Resource
-    private ConverterContext converterContext;
+    private ConverterContext defaultConverterContext;
 
     @Resource
     private CustomerService customerService;
@@ -34,19 +34,19 @@ public class DefaultCommerceFacade implements CommerceFacade {
     @Override
     public CartDTO addProductToCart(ProductDTO productDTO){
         cartService.addToCart(productDTO);
-        converterContext.setPopulatorStrategy(new ModelToDTOCartPopulatorStrategy());
-        return converterContext.convert(cartService.getCurrentCart(), CartDTO.class);
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOCartPopulatorStrategy());
+        return defaultConverterContext.convert(cartService.getCurrentCart(), CartDTO.class);
     }
 
     @Override
     public OrderDTO placeOrder(){
-        converterContext.setPopulatorStrategy(new ModelToDTOOrderPopulatorStrategy());
-        return converterContext.convert(orderService.placeOrder(), OrderDTO.class);
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOOrderPopulatorStrategy());
+        return defaultConverterContext.convert(orderService.placeOrder(), OrderDTO.class);
     }
 
     public CustomerDTO getCurrentCustomer(){
-        converterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
-        return converterContext.convert(customerService.getCurrentUser(), CustomerDTO.class);
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
+        return defaultConverterContext.convert(customerService.getCurrentUser(), CustomerDTO.class);
     }
 
 }

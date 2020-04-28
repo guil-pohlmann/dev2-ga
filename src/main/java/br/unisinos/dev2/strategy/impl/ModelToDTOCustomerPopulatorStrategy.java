@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 public class ModelToDTOCustomerPopulatorStrategy implements PopulatorStrategy<CustomerModel, CustomerDTO> {
 
     @Resource
-    private ConverterContext converterContext;
+    private ConverterContext defaultConverterContext;
 
     @Override
     public void populate(CustomerModel source, CustomerDTO target) {
@@ -20,11 +20,11 @@ public class ModelToDTOCustomerPopulatorStrategy implements PopulatorStrategy<Cu
         target.setEmail(source.getEmail());
         target.setName(source.getEmail());
 
-        converterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
-        target.setPaymentInfo(converterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
+        target.setPaymentInfo(defaultConverterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
 
-        converterContext.setPopulatorStrategy(new ModelToDTODeliveryAddressPopulatorStrategy());
-        target.setAddress(converterContext.convert(source.getAddress(), target.getAddress().getClass()));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTODeliveryAddressPopulatorStrategy());
+        target.setAddress(defaultConverterContext.convert(source.getAddress(), target.getAddress().getClass()));
 
     }
 }

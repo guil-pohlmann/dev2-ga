@@ -12,19 +12,19 @@ import javax.annotation.Resource;
 public class ModelToDTOCartPopulatorStrategy implements PopulatorStrategy<CartModel, CartDTO> {
 
     @Resource
-    private ConverterContext converterContext;
+    private ConverterContext defaultConverterContext;
 
     @Override
     public void populate(CartModel source, CartDTO target) {
         target.setCartTotal(source.getCartTotal());
 
-        converterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
-        target.setUser(converterContext.convert(source.getUser(), target.getUser().getClass()));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
+        target.setUser(defaultConverterContext.convert(source.getUser(), target.getUser().getClass()));
 
-        converterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
-        target.setPaymentInfo(converterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOPaymentInfoPopulatorStrategy());
+        target.setPaymentInfo(defaultConverterContext.convert(source.getPaymentInfo(), target.getPaymentInfo().getClass()));
 
-        converterContext.setPopulatorStrategy(new ModelToDTOProductPopulatorStrategy());
-        target.setProducts(converterContext.convertAll(source.getProducts(), ProductDTO.class));
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOProductPopulatorStrategy());
+        target.setProducts(defaultConverterContext.convertAll(source.getProducts(), ProductDTO.class));
     }
 }
