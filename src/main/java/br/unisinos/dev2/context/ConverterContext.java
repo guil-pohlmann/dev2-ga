@@ -10,7 +10,7 @@ public interface ConverterContext {
 
     <T extends java.io.Serializable> T convert(AbstractModel source, Class<T> type);
 
-    <T extends Serializable> List<T> convertAll(List<AbstractModel> source, Class<T> type);
+    <T extends Serializable> List<T> convertAll(List<? extends AbstractModel> source, Class<T> type);
 
     void setPopulatorStrategy(PopulatorStrategy populatorStrategy);
 
