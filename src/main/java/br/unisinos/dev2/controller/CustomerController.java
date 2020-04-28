@@ -2,7 +2,7 @@ package br.unisinos.dev2.controller;
 
 
 import br.unisinos.dev2.dto.CustomerDTO;
-import br.unisinos.dev2.facades.CustomerFacade;
+import br.unisinos.dev2.facades.impl.CustomerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

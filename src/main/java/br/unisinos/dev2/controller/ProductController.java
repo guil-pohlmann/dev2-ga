@@ -1,7 +1,7 @@
 package br.unisinos.dev2.controller;
 
 import br.unisinos.dev2.dto.ProductDTO;
-import br.unisinos.dev2.facades.ProductFacade;
+import br.unisinos.dev2.facades.impl.ProductFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

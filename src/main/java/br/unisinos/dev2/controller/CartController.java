@@ -2,7 +2,7 @@ package br.unisinos.dev2.controller;
 
 import br.unisinos.dev2.dto.CartDTO;
 import br.unisinos.dev2.dto.ProductDTO;
-import br.unisinos.dev2.facades.CartFacade;
+import br.unisinos.dev2.facades.impl.CartFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
