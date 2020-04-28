@@ -44,7 +44,7 @@ public class DefaultOrderService implements OrderService {
             CartModel cart = cartService.getCurrentCart();
             orderModel.setCode("123412");
             orderModel.setCurrency("BRL");
-            orderModel.setDeliveryAddress(cart.getUser().getAddress());
+            orderModel.setDeliveryAddress(cart.getUser() != null ? cart.getUser().getAddress() : null);
             orderModel.setOrderTotal(cart.getCartTotal());
             orderModel.setOwner(cart.getUser());
             orderModel.setPaymentInfo(cart.getPaymentInfo());

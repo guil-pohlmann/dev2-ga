@@ -1,6 +1,8 @@
 package br.unisinos.dev2.facades.impl;
 
 import br.unisinos.dev2.dto.CartDTO;
+import br.unisinos.dev2.dto.CustomerDTO;
+import br.unisinos.dev2.dto.OrderDTO;
 import br.unisinos.dev2.dto.ProductDTO;
 import br.unisinos.dev2.facades.CommerceFacade;
 import org.junit.jupiter.api.Test;
@@ -31,10 +33,16 @@ class DefaultCommerceFacadeTest {
 
     @Test
     void placeOrder() {
+        ProductDTO productDTO = mockProductDTO();
+        defaultCommerceFacade.addProductToCart(productDTO);
+        OrderDTO orderDTO = defaultCommerceFacade.placeOrder();
+        assertNotNull(orderDTO);
     }
 
     @Test
     void getCurrentCustomer() {
+        CustomerDTO currentCustomer = defaultCommerceFacade.getCurrentCustomer();
+        assertNotNull(currentCustomer);
     }
 
     ProductDTO mockProductDTO(){
