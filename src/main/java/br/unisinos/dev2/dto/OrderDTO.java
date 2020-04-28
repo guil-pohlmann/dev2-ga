@@ -1,5 +1,7 @@
 package br.unisinos.dev2.dto;
 
+import br.unisinos.dev2.states.order.OrderState;
+
 import java.util.List;
 
 public class OrderDTO extends AbstractDTO {
@@ -10,6 +12,8 @@ public class OrderDTO extends AbstractDTO {
     private double orderTotal;
 
     private String currency;
+
+    private OrderState orderState;
 
     private PaymentInfoDTO paymentInfo;
 
@@ -71,5 +75,13 @@ public class OrderDTO extends AbstractDTO {
 
     public void setProducts(List<ProductDTO> products) {
         this.products = products;
+    }
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
     }
 }
