@@ -1,8 +1,13 @@
 package br.unisinos.dev2.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartModel extends AbstractModel {
+
+    public CartModel() {
+        products = new ArrayList<>();
+    }
 
     private String sessionId;
 

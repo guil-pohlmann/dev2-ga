@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
@@ -42,5 +43,18 @@ public class DefaultCartService implements CartService {
 
             cartModel.setCartTotal(cartTotal);
         }
+    }
+
+    @Override
+    public void addToCart(ProductModel productModel) {
+        if (nonNull(cartModel)) {
+            cartModel.getProducts().add(productModel);
+            calculateCart(cartModel);
+        }
+    }
+
+    @Override
+    public void addToCart(List<ProductModel> products) {
+        products.forEach(this::addToCart);
     }
 }
