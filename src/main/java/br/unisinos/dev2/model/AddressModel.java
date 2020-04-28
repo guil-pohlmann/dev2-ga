@@ -1,6 +1,11 @@
 package br.unisinos.dev2.model;
 
+import br.unisinos.dev2.dto.AddressDTO;
+
+
 public class AddressModel extends AbstractModel {
+
+    private String id;
 
     private String country;
 
@@ -15,6 +20,19 @@ public class AddressModel extends AbstractModel {
     private String phoneNumber;
 
     private String postalCode;
+
+    private AddressModel(){}
+
+    //TODO maybe add a builder here?
+    public AddressModel(AddressDTO address){
+        this.country = address.getCountry();
+        this.state = address.getState();
+        this.city = address.getCity();
+        this.street = address.getCity();
+        this.streetNumber = address.getStreetNumber();
+        this.phoneNumber = address.getPhoneNumber();
+        this.postalCode = address.getPostalCode();
+    }
 
     public String getCountry() {
         return country;
