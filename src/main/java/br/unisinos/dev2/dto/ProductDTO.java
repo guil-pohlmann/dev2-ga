@@ -1,6 +1,6 @@
 package br.unisinos.dev2.dto;
 
-public class ProductDTO implements java.io.Serializable {
+public class ProductDTO extends AbstractDTO implements java.io.Serializable {
 
     private String code;
 

@@ -1,6 +1,6 @@
 package br.unisinos.dev2.dto;
 
-public class CustomerDTO implements java.io.Serializable {
+public class CustomerDTO extends AbstractDTO implements java.io.Serializable {
 
     private String email;
 
