@@ -7,6 +7,7 @@ import br.unisinos.dev2.factory.DTOFactory;
 import br.unisinos.dev2.model.OrderModel;
 import br.unisinos.dev2.model.ProductModel;
 import br.unisinos.dev2.strategy.PopulatorStrategy;
+import br.unisinos.dev2.strategy.impl.ModelToDTOCustomerPopulatorStrategy;
 import br.unisinos.dev2.strategy.impl.ModelToDTOOrderPopulatorStrategy;
 import br.unisinos.dev2.strategy.impl.ModelToDTOProductPopulatorStrategy;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,6 +19,7 @@ import org.springframework.test.context.event.annotation.BeforeTestExecution;
 import javax.annotation.Resource;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @SpringBootTest
 class DefaultConverterContextTest {
@@ -42,6 +44,15 @@ class DefaultConverterContextTest {
         assertEquals(productModel.getName(), productDTO.getName());
         assertEquals(productModel.getUpc(), productDTO.getUpc());
         assertEquals(productModel.getPrice(), productDTO.getPrice(), 0.0);
+    }
+
+    @Test
+    void shouldReturnNullWhenTryToConvertProductUsingCustomerStrategy(){
+        defaultConverterContext.setPopulatorStrategy(new ModelToDTOCustomerPopulatorStrategy());
+        ProductModel productModel = mockProductModel();
+        ProductDTO productDTO = defaultConverterContext.convert(productModel, ProductDTO.class);
+
+        assertNull(productDTO);
     }
 
     ProductModel mockProductModel(){
